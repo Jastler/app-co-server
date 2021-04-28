@@ -1,12 +1,19 @@
 const express = require("express");
+const sqlite3 = require('sqlite3').verbose();
 var cors = require('cors');
 const app = express();
-const db = require ("./database.js");
 
 const HTTP_PORT =  process.env.PORT || 8000;
 
 app.listen(HTTP_PORT, () => {
     console.log(`Server running on port ${HTTP_PORT}`)
+});
+
+let db = new sqlite3.Database('./users.db', sqlite3.OPEN_READWRITE, (err) => {
+  if (err) {
+      console.error(err.message);
+  }
+  console.log('Connected to the test database.');
 });
 
 app.use(cors());
@@ -28,15 +35,14 @@ app.get("/api/users", (req, res) => {
     GROUP BY us.user_id
     LIMIT ${req.query.limit} OFFSET ${(req.query.page - 1) * req.query.limit}
   `;
-  const params = [];
-  db.all(sql, params, (err, rows) => {
+  db.all(sql, [], (err, rows) => {
       if (err) {
         res.status(400).json({"error":err.message});
         return;
       }
       res.json({
-          "message":"success",
-          "data":rows
+        "message":"success",
+        "data":rows
       })
     });
 });
@@ -87,7 +93,3 @@ app.get("/", (req, res) => {
 app.use(function(req, res){
     res.status(404);
 });
-
-
-
-

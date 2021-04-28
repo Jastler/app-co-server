@@ -1,10 +1,8 @@
-
-//db.serialize
 const sqlite3 = require('sqlite3').verbose();
 const users = require('./api/users.json');
 const users_statistic = require('./api/users_statistic.json');
 
-const DBSOURCE = "users.sqlite"
+const DBSOURCE = "users.db"
 
 const db = new sqlite3.Database(DBSOURCE, (err) => {
   if (err) {
@@ -58,5 +56,3 @@ db.close((err) => {
   }
   console.log('Close the database connection.');
 });
-
-module.exports = db
