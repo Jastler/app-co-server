@@ -6,7 +6,6 @@
   "scripts": {
     "lint": "eslint",
     "start": "node ./migration/database.js && node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
