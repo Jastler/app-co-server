@@ -4,7 +4,8 @@
   "description": "Express REST API",
   "main": "server.js",
   "scripts": {
-    "start": "node database.js && node server.js",
+    "lint": "eslint",
+    "start": "node ./migration/database.js && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,5 +15,10 @@
     "express": "^4.17.1",
     "md5": "^2.3.0",
     "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }
